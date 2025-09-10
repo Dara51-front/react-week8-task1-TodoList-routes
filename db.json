@@ -1,0 +1,16 @@
+{
+  "todos": [
+    {
+      "userId": 1,
+      "title": "я делаю мяу",
+      "completed": true,
+      "id": "37f9"
+    },
+    {
+      "userId": 1,
+      "title": "надо доделать...",
+      "completed": false,
+      "id": "00PIxYv"
+    }
+  ]
+}
