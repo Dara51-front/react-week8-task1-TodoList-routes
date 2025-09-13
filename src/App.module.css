@@ -45,14 +45,15 @@ html {
 }
 .checkboxLabel {
   display: flex;
+  justify-content: start;
   align-items: center;
   cursor: pointer;
 }
 
 .currentcheckbox {
   position: relative;
-  top: 20%;
   left: 0;
+  margin-left: 6px;
   height: 18px;
   width: 18px;
   background-color: #ffc8c8;
@@ -84,6 +85,11 @@ html {
   border: solid #fcfbf6;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+.titleTodo {
+  display: flex;
+  justify-content: right;
 }
 
 .deleteButton {
@@ -127,16 +133,43 @@ html {
   outline: none;
 }
 
+.backLink {
+  margin-left: 9px;
+  margin-right: 7px;
+  margin-top: 3px;
+  color: #f29a9a;
+  font-size: large;
+}
+.backLink:hover {
+  color: #b9ca9c;
+}
+
 .editTask {
   font-size: 17px;
   border: none;
-  width: 400px;
+  margin-left: 7px;
   height: auto;
   background-color: rgb(255, 251, 233);
   color: rgb(112, 120, 120);
 }
 
+.editTask:hover {
+  color: #b9ca9c;
+}
+
 .editTask:focus {
+  outline: none;
+}
+
+.linkTask {
+  font-size: 17px;
+  border: none;
+  margin-left: 7px;
+  height: auto;
+  background-color: rgb(255, 251, 233);
+  color: rgb(112, 120, 120);
+}
+.linkTask:focus {
   outline: none;
 }
 

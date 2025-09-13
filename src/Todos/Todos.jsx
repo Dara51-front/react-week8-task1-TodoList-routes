@@ -1,78 +1,39 @@
 import { useState } from "react";
 import styles from "../App.module.css";
 import { useTodoState } from "../useCRUD";
+import { Link } from "react-router-dom";
 
-export const Todo = ({ id, completed, title, onDelete }) => {
-  const [editNow, setEditNow] = useState(false);
-  const [changedTodo, setChangedTodo] = useState(title);
-  const [isCompleted, setIsCompleted] = useState(completed);
+export const Todos = ({}) => {
+  const { getTodoList, onCheckTodoChange } = useTodoState();
+  const sortedTodoList = getTodoList();
 
-  const { toUpdateTodo } = useTodoState();
-
-  const onChangeContent = (event) => {
-    event.preventDefault();
-    setChangedTodo(event.target.value);
-  };
-
-  const onChangeTodoClick = () => {
-    setEditNow(true);
-  };
-
-  const onCheckTodoChange = ({ target }) => {
-    setIsCompleted(target.checked);
-    toUpdateTodo(id, {
-      title: title,
-      completed: target.checked,
-    });
-  };
-
-  const onSaveNewContentClick = () => {
-    toUpdateTodo(id, {
-      title: changedTodo,
-      completed: completed,
-    }).finally(() => {
-      setEditNow(false);
-    });
-  };
+  const checkTextLength = (str, n) =>
+    str.length > n ? str.slice(0, n - 1) + "..." : str;
 
   return (
-    <div className={styles.message} key={id}>
-      <label className={styles.checkboxLabel}>
-        <input
-          className={styles.checkbox}
-          type="checkbox"
-          name={`checkTodo-${id}`}
-          onChange={onCheckTodoChange}
-          checked={isCompleted}
-        />
-        <span
-          className={styles.currentcheckbox}
-          type="checkbox"
-          onChange={onCheckTodoChange}
-          checked={isCompleted}
-        ></span>
-      </label>
-      <input
-        className={styles.editTask}
-        type="text"
-        defaultValue={title}
-        onChange={onChangeContent}
-        readOnly={!editNow}
-      />
+    <div>
+      <ul className={styles.listTodos}>
+        {sortedTodoList.map(({ id, title, completed }) => (
+          <li className={styles.message} key={id}>
+            <div className={styles.checkboxLabel}>
+              <input
+                className={styles.checkbox}
+                type="checkbox"
+                name={`checkTodo-${id}`}
+                onChange={(e) =>
+                  onCheckTodoChange({ id, title, completed: e.target.checked })
+                }
+                checked={completed}
+              />
+              <span className={styles.currentcheckbox}></span>
 
-      <div className={styles.changeButtons}>
-        <button
-          className={styles.changeContentButton}
-          onClick={() => {
-            editNow ? onSaveNewContentClick() : onChangeTodoClick();
-          }}
-        >
-          {editNow ? `✔` : `✎`}
-        </button>
-        <button className={styles.deleteButton} onClick={onDelete}>
-          ✖
-        </button>
-      </div>
+              <Link className={styles.editTask} to={`todo/${id}`}>
+                {checkTextLength(title, 40)}
+              </Link>
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -24,9 +24,9 @@ export const ControlPanel = () => {
   };
 
   useEffect(() => {
-    if (!searchPhrase.trim() || searchPhrase === "") {
+    if (!searchPhrase.trim()) {
       setIsSearchActive(false);
-
+      setFoundedTodoList([]);
       setIsFoundTodo(todoList.length > 0);
       return;
     }

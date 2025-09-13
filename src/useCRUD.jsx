@@ -7,7 +7,6 @@ export const useTodoState = () => {
   const [foundedTodoList, setFoundedTodoList] = useState([]);
   const [isSortingEnabled, setIsSortingEnabled] = useState(false);
 
-  const todosURL = fetch("http://localhost:3000/todos");
   const refreshTodos = () => {
     fetch("http://localhost:3000/todos")
       .then((response) => response.json())
@@ -19,7 +18,7 @@ export const useTodoState = () => {
 
   useEffect(() => {
     refreshTodos();
-  }, [todosURL]);
+  }, [todoList]);
 
   // Добавление задач
   const toAddTodo = (title) => {
@@ -65,6 +64,12 @@ export const useTodoState = () => {
         refreshTodos();
       });
   };
+  const onCheckTodoChange = ({ id, title, completed }) => {
+    toUpdateTodo(id, {
+      title: title,
+      completed: completed,
+    });
+  };
 
   return {
     todoList,
@@ -82,16 +87,15 @@ export const useTodoState = () => {
     toAddTodo,
     toDeleteTodo,
     toUpdateTodo,
+    onCheckTodoChange,
 
     getTodoList: () => {
-      if (!isSearchActive) {
-        if (isSortingEnabled) {
-          return [...todoList].sort((a, b) => a.title.localeCompare(b.title));
-        } else {
-          return todoList;
-        }
+      const list = isSearchActive ? foundedTodoList : todoList;
+
+      if (isSortingEnabled) {
+        return [...list].sort((a, b) => a.title.localeCompare(b.title));
       } else {
-        return foundedTodoList;
+        return list;
       }
     },
   };
