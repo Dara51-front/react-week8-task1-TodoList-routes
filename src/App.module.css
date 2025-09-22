@@ -43,6 +43,7 @@ html {
   width: 0;
   cursor: pointer;
 }
+
 .checkboxLabel {
   display: flex;
   justify-content: start;
@@ -52,7 +53,7 @@ html {
 
 .currentcheckbox {
   position: relative;
-  left: 0;
+
   margin-left: 6px;
   height: 18px;
   width: 18px;
@@ -60,6 +61,7 @@ html {
   border: 2px solid transparent;
   border-radius: 3px;
   flex-shrink: 0;
+  pointer-events: none;
 }
 
 .message:hover .checkbox ~ .currentcheckbox {
@@ -89,14 +91,22 @@ html {
 
 .titleTodo {
   display: flex;
-  justify-content: right;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .deleteButton {
+  outline: none;
+  font-size: 30px;
   background-color: #fbbebe;
-  color: #fcfbf6;
-  padding: 2px 8px 5px 8px;
-  border: 1px solid transparent;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  margin-right: 5px;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  border: none;
 }
 
 .deleteButton:hover {
@@ -138,7 +148,7 @@ html {
   margin-right: 7px;
   margin-top: 3px;
   color: #f29a9a;
-  font-size: large;
+  font-size: 25px;
 }
 .backLink:hover {
   color: #b9ca9c;
@@ -147,8 +157,8 @@ html {
 .editTask {
   font-size: 17px;
   border: none;
-  margin-left: 7px;
-  height: auto;
+  margin-left: 5px;
+  max-width: 370px;
   background-color: rgb(255, 251, 233);
   color: rgb(112, 120, 120);
 }
@@ -161,11 +171,57 @@ html {
   outline: none;
 }
 
-.linkTask {
+.editInput {
+  flex: 1;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 200px;
   font-size: 17px;
   border: none;
   margin-left: 7px;
   height: auto;
+  background-color: rgb(255, 251, 233);
+  color: rgb(112, 120, 120);
+  width: 170px;
+}
+
+.editInput:focus {
+  outline: none;
+}
+
+.editButton {
+  outline: none;
+  font-size: 20px;
+  background-color: #fbbebe;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  margin-right: 5px;
+  color: rgb(255, 255, 255);
+  padding: 0px;
+  border: none;
+}
+
+.editButton:hover {
+  outline: none;
+  background-color: #f29a9a;
+}
+.editButton:focus {
+  outline: none;
+}
+
+.linkTask {
+  flex: 1;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-size: 17px;
+  border: none;
+  margin-left: 7px;
+  height: auto;
+
+  max-width: 215px;
   background-color: rgb(255, 251, 233);
   color: rgb(112, 120, 120);
 }
